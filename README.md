@@ -4,6 +4,8 @@
 This project focuses on predicting the likelihood of diabetes in individuals of Pima Indian heritage based on diagnostic measurements. The dataset used is the Pima Indians Diabetes dataset, originally from the National Institute of Diabetes and Digestive and Kidney Diseases.
 
 ## Dataset Description
+
+https://www.kaggle.com/datasets/mathchi/diabetes-data-set
 The dataset comprises the following features:
 
 Pregnancies: Number of times pregnant
