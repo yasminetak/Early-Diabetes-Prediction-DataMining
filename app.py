@@ -6,7 +6,7 @@ print(sklearn.__version__)
 
 app = Flask(__name__)
 
-# Load your trained SVM model
+# Load your trained Random Forest model
 model = joblib.load('random_forest_modelv1.pkl')
 
 @app.route('/')
@@ -20,14 +20,20 @@ def predict():
         pregnancies = float(request.form['pregnancies'])
         glucose = float(request.form['glucose'])
         blood_pressure = float(request.form['blood_pressure'])
+        skin_thickness = float(request.form['skin_thickness'])
+        insulin = float(request.form['insulin'])
+        bmi = float(request.form['bmi'])
+        diabetes_pedigree_function = float(request.form['diabetes_pedigree_function'])
+        age = float(request.form['age'])
+
         # Add other variables...
 
-        # Preprocess the input data (similar to your model training phase)
-        input_data = np.array([pregnancies, glucose, blood_pressure]).reshape(1, -1)
+        # Preprocess the input data
+        input_data = np.array([pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi,
+                               diabetes_pedigree_function, age]).reshape(1, -1)
 
-        # Ensure that the input_data has the same number of features as your model expects
-        if input_data.shape[1] != 28:
-            # Handle the case where the number of features doesn't match
+        # Ensure that the input_data has the correct number of features
+        if input_data.shape[1] != 30:  # Update with the correct number of features
             return render_template('error.html', message="Number of features doesn't match.")
 
         # Make a prediction using the loaded model
@@ -35,7 +41,6 @@ def predict():
 
         # Render the prediction on the result page
         return render_template('result.html', prediction=prediction)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
